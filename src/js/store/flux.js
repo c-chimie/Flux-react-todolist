@@ -1,45 +1,38 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	return {
-		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
-		},
-		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+  return {
+    store: {
+      list: [{ id: 0, text: "wash dishes" },
+      { id: 1, text: "dry dishes" }],
+    },
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+    actions: {
+        addTask: (todo) => {
+           const store = getStore();
 
-				//reset the global store
-				setStore({ demo: demo });
-			}
-		}
-	};
+           store.list.push(todo);
+
+           return (store.list)
+           
+          },
+      deleteTask: (id) => {
+        const store = getStore();
+        // console.log("id###", id)
+        function compare(tasks) {
+            console.log("tasks.id", tasks.id)
+            if(tasks.id != id){
+          return tasks};
+        }
+
+        let filteredTasks = store.list.filter(compare);
+        // console.log("filteredTasks###", filteredTasks)
+        // console.log("store.list###", store.list)
+
+        store.list = filteredTasks;
+
+        return filteredTasks;
+      },
+    },
+  };
 };
 
 export default getState;
