@@ -21,10 +21,9 @@ const Home = () => {
       const addTask = {
         id: Math.floor(Math.random() * 1000),
         text: input,
-        completed: false,
       }; // if input is empty, do not let user submit
 
-      setTasks([store.list, addTask]); // add the user input to the state (use spread operator to copy existing array of tasks)
+      setTasks([store.list, actions.addNewTask(addTask)]); // add the user input to the state (use spread operator to copy existing array of tasks)
 
       setInput(""); // make the input box appear empty again after the user submits
     }

@@ -6,10 +6,10 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
 
     actions: {
-        addTask: (todo) => {
+        addNewTask: (todo) => {
            const store = getStore();
 
-           store.list.push(todo);
+           store.list.push(todo)
 
            return (store.list)
            
